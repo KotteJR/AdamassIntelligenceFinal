@@ -1,10 +1,14 @@
 import { NextResponse } from 'next/server';
 
-const N8N_WEBHOOK_URL_STRING = 'https://n8n.profit-ai.com/webhook-test/generate-intel';
+const N8N_WEBHOOK_URL_STRING = process.env.N8N_WEBHOOK_URL;
 
 export async function POST(req: Request) {
   let n8nUrl;
   try {
+    if (!N8N_WEBHOOK_URL_STRING) {
+      console.error('[API /initiate-analysis] N8N_WEBHOOK_URL is not set in environment variables.');
+      return NextResponse.json({ error: 'Internal server configuration error: Webhook URL not configured.', status: 500 });
+    }
     n8nUrl = new URL(N8N_WEBHOOK_URL_STRING);
   } catch (e: any) {
     console.error('[API /initiate-analysis] Invalid N8N Webhook URL:', e.message);
@@ -83,7 +87,7 @@ export async function POST(req: Request) {
     if (err instanceof TypeError && err.message.includes("pattern")) {
         return NextResponse.json({ 
             error: 'Failed to initiate analysis due to a URL pattern mismatch.', 
-            details: `The n8n webhook URL (${N8N_WEBHOOK_URL_STRING}) might be malformed or there is an issue with the fetch API environment. Error: ${err.message}`,
+            details: `The n8n webhook URL (${N8N_WEBHOOK_URL_STRING || 'NOT SET'}) might be malformed or there is an issue with the fetch API environment. Error: ${err.message}`,
             status: 500 
         }, { status: 500 });
     }

@@ -193,7 +193,7 @@ const Hero = () => {
           if (statusData.isComplete) {
             clearInterval(intervalId);
             setPollingIntervalId(null);
-            addTerminalMessage('All data sources gathered! Processing with Adamass AI... (This may also take a minute)', 'success');
+            addTerminalMessage('All data sources gathered! Processing with Adamass Intelligence... (Our model is thorough so this may also take several minutes)', 'success');
             setGenerationStep('All data sources gathered. Structuring report with Adamass AI...');
 
             const processResponse = await fetch('/api/process-report-data', {
@@ -274,20 +274,21 @@ const Hero = () => {
   return (
     <>
       {/* Modern Hero Section (centered, balanced) */}
-      <section className="bg-white w-full relative overflow-hidden flex flex-col items-center">
-        <div className="w-full flex flex-col items-center justify-center pt-32 px-4">
-          <header className="max-w-4xl w-full text-center mx-auto">
-            <h1 className="font-anton text-5xl font-semibold bg-gradient-to-r from-cyan-400 via-blue-600 to-blue-400 bg-clip-text text-transparent tracking-tight text-gray-900 md:text-7xl font-sans mb-10">
+      <section className="bg-white w-full relative overflow-hidden flex flex-col items-center pt-48 lg:pt-56 pb-16 lg:pb-24">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 xl:px-32">
+          {/* Hero Block (no vertical centering) */}
+          <header className="max-w-4xl w-full text-center mx-auto mt-6 lg:mt-12">
+            <h1 className="font-anton text-5xl font-semibold bg-gradient-to-r from-cyan-400 via-blue-600 to-blue-400 bg-clip-text text-transparent tracking-tight text-gray-900 md:text-7xl font-sans mb-8">
               Welcome to Adamass AI
-          </h1>
-            <p className="my-7 max-w-4xl mx-auto tracking-tight text-gray-500 md:text-xl font-light font-sans">
+            </h1>
+            <p className="max-w-4xl mx-auto tracking-tight text-gray-500 md:text-xl font-light font-sans mb-8">
               Unlock a comprehensive desktop review. Fill in the company details, click <span className="font-semibold">"Generate Report"</span>, and receive your analysis in minutes. Or, search for a previously analyzed company.
             </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center mb-0">
+              <a href="#main-content" className="w-full sm:w-auto px-6 py-2.5 text-base font-medium rounded-lg transition-all duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500 text-center">Start Desktop Review</a>
+              <a href="#reports-section" className="w-full sm:w-auto px-6 py-2.5 text-base font-medium rounded-lg transition-all duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 bg-white text-blue-600 border border-blue-600 hover:bg-blue-50 focus:ring-blue-500 text-center">See Past Reports</a>
+            </div>
           </header>
-          <div className="flex flex-col sm:flex-row gap-3 justify-center mt-3 w-full">
-            <a href="#main-content" className="w-full sm:w-auto px-6 py-2.5 text-base font-medium rounded-lg transition-all duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500 text-center">Start Desktop Review</a>
-            <a href="#reports-section" className="w-full sm:w-auto px-6 py-2.5 text-base font-medium rounded-lg transition-all duration-150 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 bg-white text-blue-600 border border-blue-600 hover:bg-blue-50 focus:ring-blue-500 text-center">See Past Reports</a>
-          </div>
           {/* BrowserMockup-style placeholder for report image */}
           <div className="relative mt-12 flex h-full w-full flex-col items-center justify-center">
             <div className="relative w-full max-w-4xl mx-auto overflow-hidden rounded-2xl border border-gray-100" style={{ WebkitMaskImage: 'linear-gradient(to top, transparent 0%, black 50px, black 100%)', maskImage: 'linear-gradient(to top, transparent 0%, black 30%, black 80%)' }}>
@@ -321,10 +322,13 @@ const Hero = () => {
       </section>
 
       {/* Main Content Anchor */}
-      <section id="main-content" className="pt-16 flex justify-center items-start w-full">
+      <section id="main-content" className="pt-10 flex justify-center items-start w-full">
         <div className="w-full max-w-5xl bg-white rounded-lg p-6 sm:p-10 mx-auto mt-16">
           {/* Section Title: Desktop Review */}
-          <h2 className="text-center text-5xl font-bold mb-14 bg-gradient-to-r from-cyan-400 via-blue-600 to-blue-400 bg-clip-text text-transparent tracking-tight">Start a Desktop Review</h2>
+          <h2 className="text-center text-5xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-blue-600 to-blue-400 bg-clip-text text-transparent tracking-tight">Start a Desktop Review</h2>
+          <p className="max-w-3xl mx-auto text-center tracking-tight text-gray-500 md:text-lg font-light font-sans mb-10">
+            Enter the company details below and click and click "Generate Report" to receive a comprehensive, AI-driven analysis in minutes. Please do not reload, navigate through the page or close the browser tab until the report is generated. You can comfortably minimize the page and continue with your day, the report will be generated in the background.
+          </p>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start lg:items-stretch">
             {/* Left Side: Form Card */}
             <div className="space-y-5 flex flex-col bg-gray-50 p-6 rounded-lg">
@@ -444,8 +448,11 @@ const Hero = () => {
           </div>
 
           {/* Previously Analyzed Section */}
-          <div className="mt-24">
-            <h2 className="text-center text-5xl font-bold mb-14 bg-gradient-to-r from-cyan-400 via-blue-600 to-blue-400 bg-clip-text text-transparent tracking-tight">Previously Analyzed Companies</h2>
+          <section id="reports-section" className="mt-24 lg:mt-40 xl:mt-56">
+            <h2 className="text-center text-5xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-blue-600 to-blue-400 bg-clip-text text-transparent tracking-tight">Previously Analyzed Companies</h2>
+            <p className="max-w-3xl mx-auto text-center tracking-tight text-gray-500 md:text-lg font-light font-sans mb-10">
+              Browse or search for companies that have already been analyzed. Instantly view detailed reports and insights generated by Adamass Intelligence.
+            </p>
             <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
               {/* Left: Search and Filtered List */}
               <div>
@@ -454,7 +461,7 @@ const Hero = () => {
                   placeholder="Search by company alias..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full px-5 py-3 border border-gray-200 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors placeholder-gray-400 bg-gray-50 mb-6 text-lg"
+                  className="w-full px-5 py-3 border border-gray-200 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors placeholder-gray-400 bg-gray-50 8 text-lg mb-2"
                 />
                 <div className="divide-y divide-gray-100 border border-gray-200 rounded-xl bg-white overflow-hidden min-h-[120px] flex flex-col justify-center">
                   {searchTerm.trim() === '' ? (
@@ -508,7 +515,7 @@ const Hero = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </section>
 
       </div>
     </section>
